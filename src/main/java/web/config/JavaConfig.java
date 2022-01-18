@@ -1,5 +1,6 @@
 package web.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,11 +15,12 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan("web")
-public class WebConfig implements WebMvcConfigurer {
+public class JavaConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
 
-    public WebConfig(ApplicationContext applicationContext) {
+    @Autowired
+    public JavaConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
 
@@ -27,6 +29,7 @@ public class WebConfig implements WebMvcConfigurer {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
+        templateResolver.setCharacterEncoding("UTF-8");//=====Для ОТОБРАЖЕНИЯ кириллических символов=====
         templateResolver.setPrefix("/WEB-INF/pages/");
         templateResolver.setSuffix(".html");
         return templateResolver;
@@ -45,6 +48,8 @@ public class WebConfig implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
+        resolver.setCharacterEncoding("UTF-8");               //=====Для ОТОБРАЖЕНИЯ кириллических символов=====
+        resolver.setContentType("text/html; charset=UTF-8");  //=====Для ОТОБРАЖЕНИЯ кириллических символов=====
         registry.viewResolver(resolver);
     }
 }
