@@ -24,24 +24,28 @@ public class UserController {
 	@GetMapping()
 	public String index(Model model) {
 		model.addAttribute("users", userDAO.index());
-
 		return "index";
 	}
+
 	@GetMapping("/{id}")
 	public String show(@PathVariable("id") int id, Model model){
 		model.addAttribute("user", userDAO.show(id));
-
 		return "show";
 	}
-	@GetMapping("/new")
-    public String newUser(Model model){
-		model.addAttribute("user", new User());
 
-		return "new";
-}
+	@GetMapping("/new")
+    public String newUser(@ModelAttribute("user") User user){  // @ModelAttribute помещает user без параметров
+		return "new";}
+
+	@GetMapping("/{id}/edit")
+	public String edit(Model model, @PathVariable("id") int id){
+        model.addAttribute("user", userDAO.show(id));
+		return "edit";
+	}
+
 //====================@PostMapping============================
     @PostMapping()
-	public String create(@ModelAttribute("user") User user){
+	public String create(@ModelAttribute("user") User user){   // @ModelAttribute считывает данные и помещает в user
 		userDAO.save(user);
 		return "redirect:/users";         // REDIRECT переводит на нужную страницу
 
