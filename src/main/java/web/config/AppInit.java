@@ -24,14 +24,15 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
-//========================================================================================
+//============================FILTER============================================================
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);
-        FilterRegistration.Dynamic encodingFilter = aServletContext.addFilter("encodingFilter", new CharacterEncodingFilter());
-        encodingFilter.setInitParameter("encoding", "UTF-8");
-        encodingFilter.setInitParameter("forceEncoding", "true");
-        encodingFilter.addMappingForUrlPatterns(null, true, "/*");
+        FilterRegistration.Dynamic encodingFilter = aServletContext.addFilter("encodingFilter", // ДЛЯ КИРИ́ЛЛИЦЫ
+                new CharacterEncodingFilter());                                                    // ДЛЯ КИРИ́ЛЛИЦЫ
+        encodingFilter.setInitParameter("encoding", "UTF-8");                               // ДЛЯ КИРИ́ЛЛИЦЫ
+        encodingFilter.setInitParameter("forceEncoding", "true");                           // ДЛЯ КИРИ́ЛЛИЦЫ
+        encodingFilter.addMappingForUrlPatterns(null, true, "/*");             // ДЛЯ КИРИ́ЛЛИЦЫ
         registerHiddenFieldFilter(aServletContext);
     }
 

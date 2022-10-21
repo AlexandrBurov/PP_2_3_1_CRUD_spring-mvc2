@@ -40,10 +40,11 @@ public class UserDAO {
         User userToBeUpdated = show(id);
 
         userToBeUpdated.setName(updateUser.getName()); // ЕСЛИ НЕСКОЛЬКО ПОЛЕЙ, ТО КАЖДОЕ НУЖНО ОБНОВИТЬ!
-
-
     }
 
+    public void delete(int id){
+        users.removeIf(p-> p.getId() == id);
+    }
 
 
 

@@ -20,7 +20,7 @@ public class UserController {
 	public UserController(UserDAO userDAO) {
 		this.userDAO = userDAO;
 	}
-//=====================@GetMapping===========================
+//=====================@GetMapping==================================
 	@GetMapping()
 	public String index(Model model) {
 		model.addAttribute("users", userDAO.index());
@@ -48,23 +48,19 @@ public class UserController {
 	public String create(@ModelAttribute("user") User user){   // @ModelAttribute считывает данные и помещает в user
 		userDAO.save(user);
 		return "redirect:/users";         // REDIRECT переводит на нужную страницу
-
-
-	}
+    }
 //====================@PatchMapping============================
-
-    @PatchMapping("/{id}")
+	@PatchMapping("/{id}")
 	public String update(@ModelAttribute("user") User user, @PathVariable("id") int id){
 		userDAO.update(id, user);
 		return "redirect:/users";
+    }
+//====================@DeleteMapping============================
+	@DeleteMapping("/{id}")
+	public String delete(@PathVariable("id") int id) {
+		userDAO.delete(id);
+		return "redirect:/users";
+    }
 
-	}
-
-
-
-
-
-
-
-//================================================
+//==============================================================
 }
