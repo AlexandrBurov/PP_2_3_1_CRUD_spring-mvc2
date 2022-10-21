@@ -36,6 +36,14 @@ public class UserDAO {
         users.add(user);
     }
 
+    public void update(int id, User updateUser){   // ОБНОВЛЯЕМ ПОЛЯ
+        User userToBeUpdated = show(id);
+
+        userToBeUpdated.setName(updateUser.getName()); // ЕСЛИ НЕСКОЛЬКО ПОЛЕЙ, ТО КАЖДОЕ НУЖНО ОБНОВИТЬ!
+
+
+    }
+
 
 
 

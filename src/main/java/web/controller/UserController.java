@@ -51,5 +51,20 @@ public class UserController {
 
 
 	}
+//====================@PatchMapping============================
+
+    @PatchMapping("/{id}")
+	public String update(@ModelAttribute("user") User user, @PathVariable("id") int id){
+		userDAO.update(id, user);
+		return "redirect:/users";
+
+	}
+
+
+
+
+
+
+
 //================================================
 }
