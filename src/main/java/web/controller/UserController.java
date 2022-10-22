@@ -3,9 +3,12 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import web.dao.UserDAO;
 import web.model.User;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -42,13 +45,21 @@ public class UserController {
 
 //====================@PostMapping============================
     @PostMapping()
-	public String create(@ModelAttribute("user") User user){   // @ModelAttribute считывает данные и помещает в user
+	public String create(@ModelAttribute("user") @Valid User user,
+						 BindingResult bindingResult){
+		if(bindingResult.hasErrors())
+			return "new";
+
 		userDAO.save(user);
 		return "redirect:/users";         // REDIRECT переводит на нужную страницу
     }
 //====================@PatchMapping============================
 	@PatchMapping("/{id}")
-	public String update(@ModelAttribute("user") User user, @PathVariable("id") int id){
+	public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
+						 @PathVariable("id") int id){
+		if(bindingResult.hasErrors())
+			return "edit";
+
 		userDAO.update(id, user);
 		return "redirect:/users";
     }
