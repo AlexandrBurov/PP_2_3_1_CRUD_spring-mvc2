@@ -16,11 +16,11 @@ public class UserDAO {
 
     {
         users = new ArrayList<>();
-        users.add(new User(++USER_COUNT,"User_1"));
-        users.add(new User(++USER_COUNT,"User_2"));
-        users.add(new User(++USER_COUNT,"User_3"));
-        users.add(new User(++USER_COUNT,"User_4"));
-        users.add(new User(++USER_COUNT,"User_5"));
+        users.add(new User(++USER_COUNT,"Name_1","Surname_1",20));
+        users.add(new User(++USER_COUNT,"Name_2","Surname_2",25));
+        users.add(new User(++USER_COUNT,"Name_3","Surname_3",30));
+        users.add(new User(++USER_COUNT,"Name_4","Surname_4",35));
+        users.add(new User(++USER_COUNT,"Name_5","Surname_5",40));
 
     }
 //===========================================================
@@ -39,21 +39,14 @@ public class UserDAO {
     public void update(int id, User updateUser){   // ОБНОВЛЯЕМ ПОЛЯ
         User userToBeUpdated = show(id);
 
-        userToBeUpdated.setName(updateUser.getName()); // ЕСЛИ НЕСКОЛЬКО ПОЛЕЙ, ТО КАЖДОЕ НУЖНО ОБНОВИТЬ!
+        userToBeUpdated.setName(updateUser.getName());
+        userToBeUpdated.setSurname(updateUser.getSurname());
+        userToBeUpdated.setAge(updateUser.getAge());
     }
 
     public void delete(int id){
         users.removeIf(p-> p.getId() == id);
     }
-
-
-
-
-
-
-
-
-
 
 
 //===========================================================

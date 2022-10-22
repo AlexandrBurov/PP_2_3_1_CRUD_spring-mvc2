@@ -2,20 +2,39 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>All Users</title>
+    <title>Index</title>
+    <style>table th, table td {padding: 5px;}</style>
 </head>
 <body>
 
-<div th:each="user : ${users}">
-    <a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.getName()}">user</a>
-</div>
+<h1>All Users</h1>
 
-<br/>
-<hr/>
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
+        <th>Edit</th>
+        <th>Create new person</th>
+        <th>Delete</th>
 
+    </tr>
 
-<a href="/users/new">Create new person</a>
+    <tr th:each="user : ${users}">
+        <td th:utext="${user.id}">brand</td>
+        <td th:utext="${user.name}">color</td>
+        <td th:utext="${user.surname}">power</td>
+        <td th:utext="${user.age}">power</td>
+        <td><a th:href="@{/users/{id}/edit(id=${user.getId()})}">Edit</a></td>
+        <td><a th:href="@{/users/new}">Create new person</a></td>
 
+        <td><a th:method="DELETE" th:href="@{/users/{id}(id=${user.getId()})}">Delete
+        </a></td>
+
+    </tr>
+
+</table>
 
 </body>
 </html>
