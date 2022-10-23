@@ -16,7 +16,6 @@
         <th>Surname</th>
         <th>Age</th>
         <th>Edit</th>
-        <th>Create new person</th>
         <th>Delete</th>
 
     </tr>
@@ -27,14 +26,21 @@
         <td th:utext="${user.surname}">power</td>
         <td th:utext="${user.age}">power</td>
         <td><a th:href="@{/users/{id}/edit(id=${user.getId()})}">Edit</a></td>
-        <td><a th:href="@{/users/new}">Create new person</a></td>
 
         <td><a th:method="DELETE" th:href="@{/users/{id}(id=${user.getId()})}">Delete
         </a></td>
 
     </tr>
 
+
 </table>
+
+<br/>
+
+
+<form action="/users/new" target="_blank">
+    <button>Create new user</button>
+</form>
 
 </body>
 </html>
